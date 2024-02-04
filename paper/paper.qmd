@@ -1,228 +1,39 @@
 ---
-title: "Analyzing Toronto Police  Statistics between 2014 to 2022"
+title: "Understanding and Addressing the Challenges of Survey Nonresponse"
 
 author: 
   - Sirui Tan
   
-thanks: "Code and data are available at: https://github.com/siru1366/starter-folder.git."
-date: "22 Janaury, 2024"
+thanks: "Code and data are available at: https://github.com/siru1366/mini-eassy-5B.git"
+date: "4 February, 2024"
 date-format: long
-abstract: "In this paper, we investigated the crime dynamics in Toronto over the past nine years using data from the opendatatoronto Library. Employing sophisticated statistical tools from the R language, our analysis revealed discernible patterns, portraying Toronto's crime rate as a quadratic function with fluctuations tied to significant events like the 2020 city-wide closure due to the COVID-19 outbreak. By delving into specific crime categories, we identified a predominant focus on property infringement and threats to personal safety. Notably, our findings highlight the necessity for comprehensive societal efforts to address the surge in juvenile crimes observed in 2022. This research offers valuable insights into the complex interplay of societal and environmental factors influencing urban safety trends, contributing significantly to our understanding of crime dynamics in Toronto."
+abstract: "This paper provides a concise summary of the discussion on declining response rates and their implications for survey research, as explored in the Special Virtual Issue on Nonresponse Rates and Nonresponse Adjustments of the Journal of Survey Statistics and Methodology. The analysis encompasses trends observed in U.S. face-to-face household surveys, national telephone surveys, and web survey response rates. The implications of declining response rates on the representativeness of survey estimates are discussed, emphasizing the need for weighted estimates to mitigate potential biases. Furthermore, the abstract highlights the broader implications of these trends beyond the United States, prompting considerations for the generalizability of findings to survey research in other countries. The document concludes by suggesting future research directions and the importance of adapting methodologies to address the evolving challenges in survey research."
 format: pdf
 number-sections: true
 bibliography: references.bib
 ---
 
-```{r}
-#| include: false
-#| warning: false
-#| message: false
-
-library(tidyverse)
-library(palmerpenguins)
-library(readr)
-
-```
-
-# Context
-
-## Introduction
-
-## Data 
-
-## discussion
-### Yearly Trends: Statistics on the Occurrence of Five Major Crime Categories
-### Spatial and Temporal Analysis of Crime Incidents Across Toronto Neighborhoods Over the Years
-### Temporal Variation in Crime Incidents Across Different Age Cohorts
-### Demographic Analysis of Crime Incidents: A Cross-Sectional Study on Gender and Age Groups
-### Gender-Based Distribution of Crime Types: An In-Depth Analysis Across Different Offenses
-
-## Reference
-
-
 
 
 # Introduction
 
-Criminal statistics, particularly within the domain of policing, serve as a vital instrument in comprehending and addressing patterns of criminal behavior within society. Toronto Police statistics, as an exemplar in this context, offer a meticulous portrayal of the demographic dynamics and criminal typologies characterizing arrests within the city from the temporal span of 2014 to 2022. Such statistical analyses provide a nuanced understanding of the intricate interplay between law enforcement efforts and the evolving landscape of criminal activities.  
-\ In the preliminary stage of this research, an examination was conducted to assess the fluctuations in Toronto's crime rates spanning the years 2014 to 2022. The findings depicted a distinctive pattern characterized by an initial decrease, followed by a subsequent rise, with a minimum observed in 2020. Acknowledging the necessity for a more nuanced comprehension, the study proceeds to a more in-depth analysis, incorporating four additional variables: gender, age group, crime type, and region. These variables are systematically paired, enabling a comprehensive exploration of their interdependencies, offering insights beyond the broad trends observed in the overall crime rate. 
-\ In the data section, a clear presentation of the data is provided, organized by year. Transitioning to the discussion section, a more intricate analysis unfolds as the data undergoes further examination through the amalgamation of five distinct sets of variables. The subsequent shift towards a more granular analysis, as proposed, aligns with the pursuit of deeper insights.
+The Special Virtual Issue on Nonresponse Rates and Nonresponse Adjustments in the Journal of Survey Statistics and Methodology sheds light on the persistent challenges posed by nonresponse in survey research. As the cornerstone of obtaining accurate survey estimates, the issue explores various aspects of nonresponse, ranging from declining response rates to innovative methodologies for remediation. This discussion focuses on the trends and implications of declining response rates, offering insights into the consequences for the survey research landscape.
 
 
 
-# Data {#sec-data}
+# The Decline in Response Rates: Trends and Implications
+The downward trend in response rates across various modes of data collection poses significant challenges for survey researchers. The shift to web surveys, as evidenced by @daikeler2020web, accelerates the industry-wide decline in response rates. This trend necessitates a critical examination of the reliability and representativeness of survey estimates derived from datasets with lower response rates. As highlighted by @dutwin2020telephone, the use of weighted estimates becomes crucial in mitigating bias introduced by nonresponse. The implications of these trends extend beyond the United States, prompting questions about the generalizability of findings to survey research in other countries.
 
-The data employed in this paper was sourced from the opendatatoronto Library of the City of Toronto (@opendatatoronto). Specifically, the dataset utilized is titled Police Annual Statistical Report - Arrested and Charged Persons @torontodataset from the Toronto Police Services.
-Data cleaning and analysis were conducted using the open-source statistical programming language R (@citeR), leveraging functionalities from the tidyverse (@tidyverse) suite, including ggplot2 (@ggplot2), dplyr (@dplyr), readr (@readr), tibble (@tibble),stringr (@stringr) ,janitor (@janitor) and knitr (@knitr). The detailed procedures for data extraction and cleaning are expounded upon in the subsequent subsections.
-```{r}
-#| label: fig-overall
-#| fig-cap: Relationship between crimes and year
-#| echo: false
-#| warning: false
-#| message: false
+# Addressing the Challenge: Future Directions
+While the curated papers provide a comprehensive view of the challenges posed by declining response rates, they also open avenues for future research. The issues of whether these trends have continued beyond 2022, the impact of changing response rates on biases across various study designs, and the patterns observed in countries outside the U.S. remain crucial areas for exploration. The integration of adaptive data collection strategies, as suggested by @williams2018trends, could be a promising approach to address the evolving landscape of nonresponse in surveys.
 
-police_overall_data <-
-  read_csv(file = here::here(
-    "outputs/data/clean_data.csv"),
-    show_col_types = FALSE
-  )
-
-
-police_overall_data |> 
-  ggplot(aes(x =arrest_year,fill = as.factor(arrest_year), color =as.factor(arrest_year))) +
-   geom_bar() +
-    
-  theme_minimal() +# Make the theme neater
-  labs(x = "year", y = "Number") # Make labels more meaningful
-```
-
-Overall,upon analyzing the planes @fig-overall representation, discernible fluctuations in Toronto's crime rate over the years are apparent, resembling the characteristic curve of a quadratic function with an upward orientation. The nadir in 2020 coincides notably with the implementation of a city-wide closure policy in response to the COVID-19 outbreak.@HODGKINSON2022101881  indicated that amidst the COVID-19 epidemic, Toronto experienced a notable reduction in its crime rate, attributable to a myriad of governmental control policies . 
-
-
-# discusssion
-An examination solely focused on the aggregate count of criminal incidents per annum yields a somewhat overarching perspective. To cultivate a more nuanced understanding, it becomes imperative to conduct a more granular analysis that delves into the intricate details and specific categories of criminal activities. 
-\ In the discussion section, a dual-stage scrutiny of Toronto offender data is conducted.
-
-## Yearly Trends: Statistics on the Occurrence of Five Major Crime Categories
-
-```{r}
-#| label: fig-category
-#| fig-cap: Yearly Trends—Statistics on the Occurrence of Five Major Crime Categories
-#| echo: false
-#| warning: false
-#| message: false
-
-police_data <-
-  read_csv(file = here::here("outputs/data/clean_data.csv"),
-    show_col_types = FALSE
-  )
-
-
- police_data |> 
-  ggplot(aes(x =arrest_year,fill =category)) +
-  geom_bar(alpha = 0.8) +
-  scale_fill_manual(values = c("darkorange","purple","cyan4","blue","red"),
-                    guide = "none")+
-
-  geom_bar() +
-  theme_minimal() +# Make the theme neater
-    facet_wrap(~category, ncol = 1) +
-  coord_flip()
-
-```
- The analysis of criminal conduct in Toronto reveals a discernible classification into five distinct categories. Drawing upon data @fig-category spanning the preceding nine years, a prominent pattern emerges, underscoring that the primary forms of criminality center around property infringement and threats to personal safety. This nuanced observation underscores the significance of addressing these specific dimensions within the context of Toronto's criminal landscape.  
-\ Significantly, an observable downward trajectory characterizes the incidence of offenses falling within the purview of the Controlled Drugs and Substances Act.
-
-```{r}
-#| label: fig-location
-#| fig-cap: Spatial and Temporal Analysis of Crime Incidents Across Toronto Neighborhoods Over the Years
-#| echo: false
-#| warning: false
-#| message: false
-
-police_locate_data <-
-  read_csv(file = here::here(
-    "outputs/data/clean_data.csv"),
-    show_col_types = FALSE
-  )|>filter(neighbourhood  %in% c("Annex","Downtown Yonge East","Kensington-Chinatown","NSA",	
-                         "Wellington Place","York University Heights"))
- 
-
-police_locate_data |> ggplot(aes(x = neighbourhood, fill = as.factor(arrest_year), color = as.factor(arrest_year))) +
-  geom_bar(position = "stack") +
-  theme_minimal() +
-  labs(x = "Location", y = "Count")+
-   coord_flip()
-
-
-```
-## Spatial and Temporal Analysis of Crime Incidents Across Toronto Neighborhoods Over the Years
-Beyond the classification based on the nature of the crime, the geographical context of criminal incidents also holds paramount significance in crime analysis. The primary dataset encompasses an extensive list of 158 distinct streets in Toronto, rendering it operationally unwieldy for presentation purposes. In the interest of visual clarity and expediency, a pragmatic approach is adopted, focusing specifically on the six blocks that emerge as the most frequent locations for criminal activities. This judicious selection facilitates a more focused and manageable exploration of spatial patterns within the broader landscape of criminal occurrences. @fig-location
-\ The neighborhood known as NSA (Neighborhood Security Analysis) in Toronto registers the highest incidence of criminal activities, exhibiting a prevalence that is nearly twofold compared to the area occupying the second position in the ranking. 
+# Shift to Web Surveys
+@daikeler2020web provide a meta-analysis of web survey response rates compared to other modes, revealing a consistent pattern of lower response rates in web surveys. The stabilization observed between 2012 and 2016 suggests that the industry-wide response rate decline is accelerated by the growing reliance on web surveys. This shift prompts a critical examination of the potential biases introduced by changing modes of data collection.
 
 
 
-```{r}
-#| label: fig-age
-#| fig-cap: Temporal Variation in Crime Incidents Across Different Age Cohorts
-#| echo: false
-
-year_data <-
-  read_csv(file = here::here(
-    "outputs/data/combinde_data.csv"),
-    show_col_types = FALSE
-  )
-
-year_data|>
-  ggplot(aes(x = year, y = n, color = as.factor(age_cohort))) +
-  geom_point() +
-  theme_minimal() +
-  labs(x = "year", y = "number", color = "age_cohort") +
-  scale_color_brewer(palette = "Set1") +
-  theme(legend.position = "bottom")
-
-
-```
-## Temporal Variation in Crime Incidents Across Different Age Cohorts
-The cartography of offenders holds a pivotal role in comprehensive crime analysis, particularly when delineating them based on age categories. This stratification allows for the identification of specific age cohorts warranting heightened scrutiny and focused attention. This meticulous categorization aids in discerning nuanced patterns within the demographic landscape of offenders, contributing substantively to a more refined understanding of the interplay between age dynamics and criminal behavior.
-\ Over the course of the past nine years, the predominant demographic among offenders in Toronto has consistently manifested within the age bracket spanning from 25 to 44 years. @fig-age
-\ It is crucial to highlight that the incidence of juvenile crimes in Toronto has shown an elevation in the year 2022 when juxtaposed against the preceding year.
-
-
-
-```{r}
-#| label: fig-gender1
-#| fig-cap: Demographic Analysis of Crime Incidents—A Cross-Sectional Study on Gender and Age Groups
-#| echo: false
-#| warning: false
-#| message: false
-
-police_gender_data <-
-  read_csv(file = here::here(
-    "outputs/data/clean_data.csv"),
-    show_col_types = FALSE
-  )
- 
-
-police_gender_data |> 
-  # Use ggplot to create a stacked bar plot for police age data
-  ggplot(aes(x =age_cohort, fill = sex, color = sex)) +
-  geom_bar(position = "stack") +  # Create a stacked bar plot
-  theme_minimal() +# Use a minimal theme
-  labs(x = "age_cohort", y = "Count")  # Set meaningful axis labels
-
-```
-## Demographic Analysis of Crime Incidents: A Cross-Sectional Study on Gender and Age Groups
-The consideration of gender, alongside age, constitutes a pivotal aspect of our analytical framework. The chart @fig-gender1 provides insights into the gender distribution across various age groups among offenders. Regardless of the age cohort, the proportion of female offenders consistently falls significantly below that of their male counterparts. This trend is particularly pronounced in the juvenile and senior age groups, where the number of female offenders represents only about one-quarter of the male demographic. In the middle-aged group, this figure hovers at approximately one-third of the male population.
-```{r}
-#| label: fig-gender2
-#| fig-cap: Gender-Based Distribution of Crime Types—An In-Depth Analysis Across Different Offenses
-#| echo: false
-#| warning: false
-#| message: false
-
-sex_data <-
-  read_csv(file = here::here(
-    "outputs/data/clean_data.csv"),
-    show_col_types = FALSE
-  )
-
-
- sex_data |> 
-  ggplot(aes(x =sex,fill =sex)) +
-  geom_bar(alpha = 0.8) +
-  scale_fill_manual(values = c("red","blue"),
-                    guide = "none")+
-
-  geom_bar() +
-  theme_minimal() +# Make the theme neater
-    facet_wrap(~category, ncol = 1) +
-  coord_flip()
-
-```
-## Gender-Based Distribution of Crime Types: An In-Depth Analysis Across Different Offenses
-By employing various screening methodologies, we can discern the gender distribution among offenders across distinct crime categories. @fig-gender2 Consistently, the representation of women in the five principal crime types in Toronto is notably lower than that of men. Specifically, the male-to-female ratio is most proximate in offenses against property, standing at approximately 2:1. In contrast, the male-to-female ratio diverges considerably in the category of criminal traffic offenses, where it reaches approximately 5:1.This variance may be attributed to the demographic composition of drivers, where the proportion of female drivers is noticeably smaller than that of their male counterparts.For instance,the representation of women among Canadian train drivers stands at a mere three percent (@truck).
-
+# Conclusion
+The Special Virtual Issue on Nonresponse Rates and Nonresponse Adjustments offers a valuable overview of the challenges faced by survey researchers in the context of declining response rates. By understanding these trends and their implications, researchers can adapt their methodologies to ensure the reliability and representativeness of survey estimates. The issue sets the stage for future investigations into the dynamics of nonresponse, calling for a continued exploration of innovative strategies to address the evolving challenges in survey research.
 
 
 
